@@ -3,6 +3,15 @@ class PlacesController < ApplicationController
   def index
     @places = Place.all
   end
+  
+  def home
+    @user = User.find_by(id: session["user_id"])
+    if @user != nil
+      redirect_to "/places"
+    else
+      redirect_to "/login"
+    end
+  end
 
   def show
     @place = Place.find_by({ "id" => params["id"] })

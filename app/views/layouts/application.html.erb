@@ -24,37 +24,32 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="text-decoration-underline text-primary h7 d-block" aria-current="page" href="/">Home</a>
+            <% @user = User.find_by({ "id" => session["user_id"] }) %>
+              <a class="text-decoration-underline text-primary h7 d-block" aria-current="page" href="/">Home</a>
           </li>
         </ul>
         
         <ul class="navbar-nav mb-2 mb-lg-0">
           <% @user = User.find_by({ "id" => session["user_id"] }) %>
           <% if @user == nil %>
-            <ul class="list-unstyled d-flex">
-              <li class="nav-item">
-                <a href="/login" class="text-decoration-underline text-primary h7 d-block">Login</a>
-              </li>
-              <li class="nav-separator">
-                <span class="text-primary h7 d-block mx-2 text-black"> | </span>
-              </li>
-              <li class="nav-item">
-                <a href="/users/new" class="text-decoration-underline text-primary h7 d-block">Sign Up</a>
-              </li>
-            </ul>
+            <li class="nav-item">
+              <a href="/login" class="text-decoration-underline text-primary h7 d-block">Login</a>
+            </li>
+            <li class="nav-separator">
+              <span class="text-primary h7 d-block mx-2 text-black"> | </span>
+            </li>
+            <li class="nav-item">
+              <a href="/users/new" class="text-decoration-underline text-primary h7 d-block">Sign Up</a>
+            </li>
           <% else %>
-            <li class="navbar-text">
-              Logged in as: <%= @user["first_name"] %>
-              |
+            <li class="nav-item d-inline-block text-primary h7 mx-2 text-black">
+              Logged in as: <%= @user["username"] %> |
             </li>
             <li class="nav-item">
-              <a href="/logout" class="nav-link">Logout</a>
-            </li>
-            <li class="nav-item">
-              <a href="/posts/new/" class="btn btn-success">New Post</a>
+              <a href="/logout" class="nav-item d-inline-block text-decoration-underline text-primary h7">Logout</a>
             </li>
           <% end %>
-        </div>
+        </ul>
   
       </div>
     </div>
